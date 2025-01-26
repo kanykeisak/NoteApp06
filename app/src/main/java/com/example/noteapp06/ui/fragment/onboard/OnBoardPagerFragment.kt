@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.noteapp06.R
 import com.example.noteapp06.databinding.FragmentOnBoardPagerBinding
+import com.example.noteapp06.utils.PreferenceHelper
 
 class OnBoardPagerFragment : Fragment() {
     
@@ -23,6 +25,7 @@ class OnBoardPagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
+        setupListeners()
     }
     
     private fun initialize() = with(binding) {
@@ -45,6 +48,16 @@ class OnBoardPagerFragment : Fragment() {
                 txtOnboardDescription.text = "Синхронизация на всех устройствах. Доступ к записям в любое время и в любом месте."
                 btnStart.visibility = View.VISIBLE
             }
+        }
+    }
+    
+    private fun setupListeners() = with(binding){
+        val sharedPreferences = PreferenceHelper()
+        sharedPreferences.unit(requireContext())
+        
+        btnStart.setOnClickListener{
+            sharedPreferences.onBoard = true
+            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
         }
     }
     

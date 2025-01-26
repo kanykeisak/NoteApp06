@@ -30,6 +30,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="578dp"
         app:dotsColor="#E0E0E0"
-        app:selectedDotColor="#FF9800"/>
+        app:selectedDotColor="#FF9800" />
 
 </FrameLayout>
