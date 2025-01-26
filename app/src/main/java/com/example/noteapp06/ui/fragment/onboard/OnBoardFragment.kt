@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.noteapp06.R
 import com.example.noteapp06.databinding.FragmentOnBoardBinding
 import com.example.noteapp06.ui.adapters.OnBoardAdapter
+import com.example.noteapp06.utils.PreferenceHelper
 
 class OnBoardFragment : Fragment() {
     
