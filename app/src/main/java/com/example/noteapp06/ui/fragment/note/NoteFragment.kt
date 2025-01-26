@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.example.noteapp06.R
 import com.example.noteapp06.databinding.FragmentNoteBinding
 import com.example.noteapp06.utils.PreferenceHelper
@@ -36,7 +38,15 @@ class NoteFragment : Fragment() {
         }
         txtText.text = sharedPreferences.text
         
-        
+        btnAction.setOnClickListener {
+            findNavController().navigate(R.id.action_noteFragment_to_noteDetailFragment, null,
+                navOptions {
+                    anim {
+                        enter = R.anim.slade_in_right
+                        exit = R.anim.slade_out_left
+                    }
+                })
+        }
     }
     
 }
