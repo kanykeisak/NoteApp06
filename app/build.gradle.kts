@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -26,6 +28,8 @@ android {
             )
         }
     }
+    
+    
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -55,4 +59,9 @@ dependencies {
     implementation (libs.lottie)
     
     implementation (libs.dotsindicator)
+    
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    
+    implementation (libs.threetenabp)
 }
