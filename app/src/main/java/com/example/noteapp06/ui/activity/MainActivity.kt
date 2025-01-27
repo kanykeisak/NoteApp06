@@ -1,5 +1,6 @@
 package com.example.noteapp06.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -27,5 +28,8 @@ class MainActivity : AppCompatActivity() {
         if (sharedPreferences.onBoard) {
             navController.navigate(R.id.noteFragment)
         }
+        
+        
+        
     }
 }
