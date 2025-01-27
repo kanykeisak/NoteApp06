@@ -30,6 +30,7 @@ class App: Application() {
                 ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
             }
         }
+        
         return appDatabase
     }
 }
