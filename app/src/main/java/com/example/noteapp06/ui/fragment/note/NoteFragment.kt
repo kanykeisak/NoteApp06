@@ -5,20 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.Lottie.initialize
 import com.example.noteapp06.App
 import com.example.noteapp06.R
+import com.example.noteapp06.data.models.NoteModel
 import com.example.noteapp06.databinding.FragmentNoteBinding
 import com.example.noteapp06.ui.adapters.NoteAdapter
+import com.example.noteapp06.ui.interfaces.OnClickItem
 import com.example.noteapp06.utils.PreferenceHelper
 
-class NoteFragment : Fragment() {
+class NoteFragment : Fragment(), OnClickItem{
     
     private lateinit var binding: FragmentNoteBinding
-    private val noteAdapter: NoteAdapter = NoteAdapter()
+    private val noteAdapter: NoteAdapter = NoteAdapter(this, this)
     private var isGridLayout = false
     
     override fun onCreateView(
@@ -62,6 +65,27 @@ class NoteFragment : Fragment() {
         App.appDatabase?.noteDao()?.getAll()?.observe(viewLifecycleOwner){listModel ->
             noteAdapter.submitList(listModel)
         }
+    }
+    
+    override fun onLongClick(noteModel: NoteModel) {
+        val builder = AlertDialog.Builder(requireContext())
+        
+        with(builder){
+            setTitle("Удалить заметку?")
+            setPositiveButton("Удалить") { dialog, _ ->
+                App.appDatabase?.noteDao()?.delete(noteModel)
+            }
+            setNegativeButton("Отмена"){ dialog, _ ->
+                dialog.cancel()
+            }
+            show()
+        }
+        builder.create()
+    }
+    
+    override fun onClick(noteModel: NoteModel) {
+        val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(noteModel.id)
+        findNavController().navigate(action)
     }
     
     

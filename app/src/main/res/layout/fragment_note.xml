@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.note.NoteFragment">
+    tools:context=".ui.fragment.note.NoteFragment"
+    android:background="@color/black">
 
     <ToggleButton
         android:id="@+id/toggleLayout"
@@ -14,8 +15,27 @@
         android:textOff=""
         android:background="@drawable/toggle_button_shape"
         android:layout_gravity="end"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="18dp"
+        android:layout_height="16dp"
+        android:background="@drawable/ic_menu"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Все заметки"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="14dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_note"

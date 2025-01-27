@@ -7,21 +7,34 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noteapp06.data.models.NoteModel
 import com.example.noteapp06.databinding.ItemNoteBinding
+import com.example.noteapp06.ui.interfaces.OnClickItem
 import com.example.noteapp06.ui.adapters.NoteAdapter.ViewHolder as ViewHolder1
 
-class NoteAdapter: ListAdapter<NoteModel, NoteAdapter.ViewHolder>(DiffCallback()) {
+class NoteAdapter(
+    private val onLongClick: OnClickItem,
+    private val onClick: OnClickItem
+): ListAdapter<NoteModel, NoteAdapter.ViewHolder>(DiffCallback()) {
     class ViewHolder(private val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NoteModel) {
             binding.txtTitle.text = item.title
             binding.txtDescription.text = item.description
-            binding.tvDate.text = item.date
-            binding.tvTime.text = item.time
+//            binding.tvDate.text = item.date
+//            binding.tvTime.text = item.time
         }
         
     }
     
     override fun onBindViewHolder(holder: ViewHolder1, position: Int) {
         holder.bind(getItem(position))
+        
+        holder.itemView.setOnLongClickListener {
+            onLongClick.onLongClick(getItem(position))
+            true
+        }
+        
+        holder.itemView.setOnClickListener {
+            onClick.onClick(getItem(position))
+        }
     }
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder1 {
@@ -42,5 +55,4 @@ class NoteAdapter: ListAdapter<NoteModel, NoteAdapter.ViewHolder>(DiffCallback()
             return oldItem == newItem
         }
     }
-    
 }
