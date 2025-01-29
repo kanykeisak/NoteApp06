@@ -98,9 +98,4 @@ class AuthFragment : Fragment() {
             Toast.makeText(requireContext(), "Аутефикация не удалась ", Toast.LENGTH_LONG).show()
         }
     }
-    
-    //dev
-    
-    
-    
 }

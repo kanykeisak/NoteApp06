@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_note_app"
+        android:title="AuthFragment" />
+    <item
+        android:id="@+id/nav_on_board"
+        android:title="OnBoard" />
+    <item
+        android:id="@+id/nav_store_fragment"
+        android:title="StoreFragment" />
+</menu>
