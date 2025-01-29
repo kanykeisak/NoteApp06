@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,12 +18,16 @@ import com.example.noteapp06.databinding.FragmentNoteBinding
 import com.example.noteapp06.ui.adapters.NoteAdapter
 import com.example.noteapp06.ui.interfaces.OnClickItem
 import com.example.noteapp06.utils.PreferenceHelper
+import com.google.android.material.navigation.NavigationView
 
 class NoteFragment : Fragment(), OnClickItem{
     
     private lateinit var binding: FragmentNoteBinding
     private val noteAdapter: NoteAdapter = NoteAdapter(this, this)
     private var isGridLayout = false
+    
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +42,10 @@ class NoteFragment : Fragment(), OnClickItem{
         initialize()
         setupListener()
         getData()
+        
+        drawerLayout = requireActivity().findViewById(R.id.noteFragment)
+        navigationView = requireActivity().findViewById(R.id.navigation_view)
+        
     }
     
     private fun initialize() {
@@ -58,6 +67,26 @@ class NoteFragment : Fragment(), OnClickItem{
             } else {
                 rvNote.layoutManager = LinearLayoutManager(requireContext())
             }
+        }
+        
+        binding.ivMenu.setOnClickListener {
+            drawerLayout.openDrawer(navigationView)
+        }
+        
+        navigationView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_note_app -> {
+                    findNavController().navigate(R.id.authFragment)
+                }
+                R.id.nav_on_board -> {
+                    findNavController().navigate(R.id.onBoardFragment)
+                }
+                R.id.nav_store_fragment -> {
+                    findNavController().navigate(R.id.storeFragment)
+                }
+            }
+            drawerLayout.closeDrawer(navigationView)
+            true
         }
     }
     
