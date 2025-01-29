@@ -45,14 +45,14 @@ class NoteDetailFragment : Fragment() {
         binding.tvDate.text = currentDate
         binding.tvTime.text = currentTime
         
-        binding.ivColor.setOnClickListener {
-            // Открываем ColorPickerDialogFragment
-            val dialog = ColorPickerDialogFragment { selectedColor ->
-                // Устанавливаем выбранный цвет в качестве фона или другого элемента
-                binding.root.setBackgroundColor(selectedColor)
-            }
-            dialog.show(parentFragmentManager, "colorPicker")
-        }
+//        binding.ivColor.setOnClickListener {
+//            // Открываем ColorPickerDialogFragment
+//            val dialog = ColorPickerDialogFragment { selectedColor ->
+//                // Устанавливаем выбранный цвет в качестве фона или другого элемента
+//                binding.root.setBackgroundColor(selectedColor)
+//            }
+//            dialog.show(parentFragmentManager, "colorPicker")
+//        }
     }
     
     private fun updateNote() {
