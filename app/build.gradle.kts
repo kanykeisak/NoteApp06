@@ -4,6 +4,8 @@ plugins {
     
     id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
+    
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -50,6 +52,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,4 +68,9 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     
     implementation (libs.threetenabp)
+    
+    implementation(libs.firebase.bom)
+    implementation(libs.firebase.analytics)
+    
+    implementation(libs.play.services.auth)
 }

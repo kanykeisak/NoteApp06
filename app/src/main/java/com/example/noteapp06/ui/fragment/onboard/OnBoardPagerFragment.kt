@@ -57,7 +57,7 @@ class OnBoardPagerFragment : Fragment() {
         
         btnStart.setOnClickListener{
             sharedPreferences.onBoard = true
-            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+            findNavController().navigate(R.id.action_onBoardFragment_to_authFragment)
         }
     }
     
