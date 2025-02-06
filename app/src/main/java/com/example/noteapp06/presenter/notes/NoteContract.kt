@@ -8,7 +8,7 @@ interface NoteContract {
         fun showError(message: String)
     }
     
-    interface Presenter { // загрузить
+    interface Presenter { //Загрузка
         fun loadNotes()
         fun deleteNote(note: NoteModel)
     }
