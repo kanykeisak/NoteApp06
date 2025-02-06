@@ -22,27 +22,6 @@ class DialogColorFragment(
         return binding.root
     }
     
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        // Устанавливаем обработчики для кнопок цветов
-//        binding.colorYellow.setOnClickListener {
-//            onColorSelected(Color.YELLOW)
-//            dismiss()
-//        }
-//        binding.colorBlue.setOnClickListener {
-//            onColorSelected(Color.BLUE)
-//            dismiss()
-//        }
-//        binding.colorPurple.setOnClickListener {
-//            onColorSelected(Color.MAGENTA)
-//            dismiss()
-//        }
-//        binding.colorGreen.setOnClickListener {
-//            onColorSelected(Color.GREEN)
-//            dismiss()
-//        }
-//    }
 }
 
 

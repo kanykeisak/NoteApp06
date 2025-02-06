@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.noteapp06.data.models.NoteModel
+import com.example.noteapp06.model.data.models.NoteModel
 import com.example.noteapp06.databinding.ItemNoteBinding
 import com.example.noteapp06.ui.interfaces.OnClickItem
 import com.example.noteapp06.ui.adapters.NoteAdapter.ViewHolder as ViewHolder1

@@ -3,7 +3,7 @@ package com.example.noteapp06
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.example.noteapp06.data.db.AppDatabase
+import com.example.noteapp06.model.data.db.AppDatabase
 import com.example.noteapp06.utils.PreferenceHelper
 import com.jakewharton.threetenabp.AndroidThreeTen
 
