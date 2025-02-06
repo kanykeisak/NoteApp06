@@ -1,6 +1,7 @@
 package com.example.noteapp06.ui.fragment.note
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +11,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.lottie.Lottie.initialize
-import com.example.noteapp06.App
 import com.example.noteapp06.R
-import com.example.noteapp06.data.models.NoteModel
+import com.example.noteapp06.model.data.models.NoteModel
 import com.example.noteapp06.databinding.FragmentNoteBinding
+import com.example.noteapp06.presenter.notes.NoteContract
+import com.example.noteapp06.presenter.notes.NotePresenter
 import com.example.noteapp06.ui.adapters.NoteAdapter
 import com.example.noteapp06.ui.interfaces.OnClickItem
-import com.example.noteapp06.utils.PreferenceHelper
 import com.google.android.material.navigation.NavigationView
 
-class NoteFragment : Fragment(), OnClickItem{
+class NoteFragment : Fragment(), OnClickItem, NoteContract.View{
     
     private lateinit var binding: FragmentNoteBinding
     private val noteAdapter: NoteAdapter = NoteAdapter(this, this)
@@ -28,6 +28,8 @@ class NoteFragment : Fragment(), OnClickItem{
     
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
+    
+    private val presenter by lazy { NotePresenter(this) }
     
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +43,9 @@ class NoteFragment : Fragment(), OnClickItem{
         super.onViewCreated(view, savedInstanceState)
         initialize()
         setupListener()
-        getData()
+        presenter.loadNotes()
+        
+//        getData()
         
         drawerLayout = requireActivity().findViewById(R.id.noteFragment)
         navigationView = requireActivity().findViewById(R.id.navigation_view)
@@ -90,11 +94,7 @@ class NoteFragment : Fragment(), OnClickItem{
         }
     }
     
-    private fun getData() {
-        App.appDatabase?.noteDao()?.getAll()?.observe(viewLifecycleOwner){listModel ->
-            noteAdapter.submitList(listModel)
-        }
-    }
+//
     
     override fun onLongClick(noteModel: NoteModel) {
         val builder = AlertDialog.Builder(requireContext())
@@ -102,7 +102,7 @@ class NoteFragment : Fragment(), OnClickItem{
         with(builder){
             setTitle("Удалить заметку?")
             setPositiveButton("Удалить") { dialog, _ ->
-                App.appDatabase?.noteDao()?.delete(noteModel)
+                presenter.deleteNote(noteModel)
             }
             setNegativeButton("Отмена"){ dialog, _ ->
                 dialog.cancel()
@@ -115,7 +115,16 @@ class NoteFragment : Fragment(), OnClickItem{
     override fun onClick(noteModel: NoteModel) {
         val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(noteModel.id)
         findNavController().navigate(action)
+        
+        
     }
     
+    override fun showNotes(notes: List<NoteModel>) {
+        noteAdapter.submitList(notes)
+        noteAdapter.notifyDataSetChanged()
+    }
     
+    override fun showError(message: String) {
+        Log.e("NotesFragment", message)
+    }
 }

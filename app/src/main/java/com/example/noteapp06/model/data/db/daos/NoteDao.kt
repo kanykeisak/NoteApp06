@@ -1,4 +1,4 @@
-package com.example.noteapp06.data.db.daos
+package com.example.noteapp06.model.data.db.daos
 
 import android.provider.ContactsContract.CommonDataKinds.Note
 import androidx.lifecycle.LiveData
@@ -8,7 +8,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.noteapp06.data.models.NoteModel
+import com.example.noteapp06.model.data.models.NoteModel
 
 @Dao
 interface NoteDao {
@@ -26,5 +26,5 @@ interface NoteDao {
     fun update(noteModel: NoteModel)
     
     @Query("SELECT * FROM noteModel WHERE id = :id")
-    fun getById(id: Int):NoteModel?
+    fun getById(id: Int): NoteModel?
 }

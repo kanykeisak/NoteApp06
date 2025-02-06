@@ -1,6 +1,6 @@
 package com.example.noteapp06.ui.interfaces
 
-import com.example.noteapp06.data.models.NoteModel
+import com.example.noteapp06.model.data.models.NoteModel
 
 interface OnClickItem {
     

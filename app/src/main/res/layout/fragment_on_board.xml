@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/txt_skip"
-        android:text="Пропустить"
+        android:text="@string/note_on_board"
         android:textSize="15sp"
         android:textColor="#D88B02"
         android:layout_gravity="end"

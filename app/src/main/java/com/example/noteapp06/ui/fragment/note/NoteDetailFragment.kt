@@ -2,6 +2,7 @@ package com.example.noteapp06.ui.fragment.note
 
 import android.graphics.Color
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Note
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,11 @@ import android.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import com.example.noteapp06.App
 import com.example.noteapp06.R
-import com.example.noteapp06.data.models.NoteModel
+import com.example.noteapp06.model.data.models.NoteModel
 import com.example.noteapp06.databinding.FragmentNoteDetailBinding
+import com.example.noteapp06.presenter.notedetail.NoteDetailContract
+import com.example.noteapp06.presenter.notedetail.NoteDetailPresenter
+import com.example.noteapp06.presenter.notes.NotePresenter
 import java.util.Date
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -19,10 +23,12 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class NoteDetailFragment : Fragment() {
+class NoteDetailFragment : Fragment(), NoteDetailContract.View {
     
     private lateinit var binding: FragmentNoteDetailBinding
     private var currentNote: NoteModel? = null
+    
+    private val presenter by lazy { NoteDetailPresenter(this) }
     
     private var noteId: Int = -1
     
@@ -45,14 +51,6 @@ class NoteDetailFragment : Fragment() {
         binding.tvDate.text = currentDate
         binding.tvTime.text = currentTime
         
-//        binding.ivColor.setOnClickListener {
-//            // Открываем ColorPickerDialogFragment
-//            val dialog = ColorPickerDialogFragment { selectedColor ->
-//                // Устанавливаем выбранный цвет в качестве фона или другого элемента
-//                binding.root.setBackgroundColor(selectedColor)
-//            }
-//            dialog.show(parentFragmentManager, "colorPicker")
-//        }
     }
     
     private fun updateNote() {
@@ -73,17 +71,23 @@ class NoteDetailFragment : Fragment() {
         btnAdd.setOnClickListener {
             val etTitle = etTitle.text.toString()
             val etDescription = etDescription.text.toString()
-//            val currentDate = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(Date())
-//            val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
             
             if(noteId != -1){
                 val updateNote = NoteModel(etTitle, etDescription)
                 updateNote.id = noteId
-                App.appDatabase?.noteDao()?.update(updateNote)
+                presenter.updateNote(updateNote)
             }else{
-                App.appDatabase?.noteDao()?.insert(NoteModel(etTitle, etDescription))
+                presenter.saveNote(NoteModel(title = etTitle, description = etDescription))
             }
             findNavController().navigateUp()
         }
+    }
+    
+    override fun showNotes(notes: List<NoteModel>) {
+    
+    }
+    
+    override fun showError(message: String) {
+    
     }
 }

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.noteapp06.data.models.NoteModel
+import com.example.noteapp06.model.data.models.NoteModel
 import com.example.noteapp06.databinding.ItemStoreBinding
 import com.example.noteapp06.ui.adapters.NoteAdapter.DiffCallback
 
